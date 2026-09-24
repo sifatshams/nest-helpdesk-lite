@@ -33,4 +33,7 @@ export class TicketsService {
   findAll() {
     return this.tickets;
   }
+  findOne(id: number) {
+    return this.tickets.find((ticket) => ticket.id === id);
+  }
 }
