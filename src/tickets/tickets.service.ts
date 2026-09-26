@@ -29,6 +29,7 @@ export class TicketsService {
       createdAt: '2026-09-22T00:45:00.000Z',
     },
   ];
+  private nextTicketId = 4;
 
   findAll(status?: Ticket['status'], priority?: Ticket['priority']) {
     let tickets = this.tickets;
@@ -43,12 +44,28 @@ export class TicketsService {
 
     return tickets;
   }
+
   findOne(id: number) {
     const ticket = this.tickets.find((ticket) => ticket.id === id);
 
     if (!ticket) {
       throw new NotFoundException(`Ticket with ID ${id} not found`);
     }
+
+    return ticket;
+  }
+
+  create(payload: any) {
+    const ticket: Ticket = {
+      id: this.nextTicketId ++,
+      subject: payload.subject,
+      description: payload.description,
+      priority: payload.priority,
+      status: 'open',
+      createdAt: new Date().toISOString(),
+    };
+
+    this.tickets.push(ticket);
 
     return ticket;
   }
