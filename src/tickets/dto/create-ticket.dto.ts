@@ -1,11 +1,11 @@
-import { IsEmpty, IsIn, IsString } from 'class-validator';
+import { IsIn, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTicketDto {
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   subject: string;
   @IsString()
-  @IsEmpty()
+  @IsNotEmpty()
   description: string;
   @IsIn(['low', 'medium', 'high'])
   priority: 'low' | 'medium' | 'high';
